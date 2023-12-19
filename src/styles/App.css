@@ -3,15 +3,16 @@
   padding: 0;
 }
 
+body {
+  background: url("/public/background.jpg");
+}
+
 #root {
   font-family: "Times New Roman", Times, serif;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
   align-items: center;
   gap: 50px;
-  height: 100vh;
-  background: url("/public/background.jpg");
 }
 
 header {
@@ -87,6 +88,8 @@ footer {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  position: absolute;
+  bottom: 0;
 }
 
 .sources {
@@ -140,5 +143,8 @@ a {
     display: flex;
     flex-direction: column;
     gap: 20px;
+  }
+  footer {
+    position: static;
   }
 }
