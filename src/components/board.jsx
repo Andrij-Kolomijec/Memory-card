@@ -1,21 +1,31 @@
-function generateUniqueNumbersArray() {
-  const uniqueNumbers = [];
-  while (uniqueNumbers.length < 25) {
-    const randomNumber = Math.floor(Math.random() * (99 + 1));
-    if (!uniqueNumbers.includes(randomNumber)) {
-      uniqueNumbers.push(randomNumber);
+export default function Board(props) {
+  function generateUniqueNumbersArray() {
+    const uniqueNumbers = [];
+    while (uniqueNumbers.length < 25) {
+      const randomNumber = Math.floor(Math.random() * (99 + 1));
+      if (!uniqueNumbers.includes(randomNumber)) {
+        uniqueNumbers.push(randomNumber);
+      }
+    }
+    if (
+      uniqueNumbers.every((number) => props.cards[number].clicked) &&
+      props.score < 100
+    ) {
+      return generateUniqueNumbersArray();
+    } else {
+      return uniqueNumbers;
     }
   }
-  return uniqueNumbers;
-}
 
-export default function Board(props) {
-  const cardsList = generateUniqueNumbersArray().map((key) => (
-    <div key={props.cards[key].id}>
+  let uniqueNumbersArray = generateUniqueNumbersArray();
+  const cardsList = uniqueNumbersArray.map((number) => (
+    <div key={props.cards[number].id}>
       <img
-        src={props.cards[key].src}
-        id={props.cards[key].id}
+        draggable={false}
+        src={props.cards[number].src}
+        id={props.cards[number].id}
         onClick={props.onClick}
+        className={props.cards[number].clicked ? "red" : ""}
       />
     </div>
   ));

@@ -1,9 +1,9 @@
 import { useState, useEffect } from "react";
 import "./styles/App.css";
 import Cards from "./components/cards.js";
-import svgFileNames from "./components/svgFileNames.js";
 import Header from "./components/header.jsx";
 import Board from "./components/board.jsx";
+import WinDialogWindow from "./components/winDialogWindow.jsx";
 
 function App() {
   const [cards, setCards] = useState(Cards);
@@ -13,6 +13,9 @@ function App() {
   useEffect(() => {
     if (currentScore > highScore) {
       setHighScore(currentScore);
+    }
+    if (currentScore === 100) {
+      document.querySelector("dialog").showModal();
     }
   }, [currentScore]);
 
@@ -25,8 +28,8 @@ function App() {
       setCurrentScore(currentScore + 1);
     } else {
       setCards(
-        Object.keys(newCards).map((key) => ({
-          ...newCards[key],
+        Object.keys(newCards).map((card) => ({
+          ...newCards[card],
           clicked: false,
         })),
       );
@@ -34,10 +37,23 @@ function App() {
     }
   }
 
+  function handleWin() {
+    const newCards = { ...cards };
+    setCards(
+      Object.keys(newCards).map((card) => ({
+        ...newCards[card],
+        clicked: false,
+      })),
+    );
+    setCurrentScore(0);
+    document.querySelector("dialog").close();
+  }
+
   return (
     <>
       <Header currentScore={currentScore} highScore={highScore} />
-      <Board onClick={handleClick} cards={cards} />
+      <Board onClick={handleClick} cards={cards} score={currentScore} />
+      <WinDialogWindow onClick={handleWin} />
     </>
   );
 }
