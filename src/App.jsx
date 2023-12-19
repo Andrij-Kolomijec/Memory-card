@@ -4,6 +4,7 @@ import Cards from "./components/cards.js";
 import Header from "./components/header.jsx";
 import Board from "./components/board.jsx";
 import WinDialogWindow from "./components/winDialogWindow.jsx";
+import Footer from "./components/footer.jsx";
 
 function App() {
   const [cards, setCards] = useState(Cards);
@@ -54,6 +55,7 @@ function App() {
       <Header currentScore={currentScore} highScore={highScore} />
       <Board onClick={handleClick} cards={cards} score={currentScore} />
       <WinDialogWindow onClick={handleWin} />
+      <Footer />
     </>
   );
 }

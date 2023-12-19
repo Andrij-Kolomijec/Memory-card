@@ -25,7 +25,16 @@ export default function Board(props) {
         src={props.cards[number].src}
         id={props.cards[number].id}
         onClick={props.onClick}
-        className={props.cards[number].clicked ? "red" : ""}
+        // className={props.cards[number].clicked ? "red" : ""}
+        style={{
+          filter: `invert(${Math.floor(
+            Math.random() * 70,
+          )}%) sepia(${Math.floor(Math.random() * 100)}%) saturate(${Math.floor(
+            Math.random() * 2000,
+          )}%) hue-rotate(${Math.floor(
+            Math.random() * 360,
+          )}deg) brightness(100%) contrast(100%)`,
+        }}
       />
     </div>
   ));

@@ -6,10 +6,52 @@
 #root {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
   gap: 50px;
   height: 100vh;
+  background: url("/public/background.jpg");
+}
+
+header {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 100px;
+}
+
+.headline {
+  font-size: 50px;
+  font-style: italic;
+  color: rgb(233, 201, 159);
+  position: absolute;
+  top: 20px;
+  left: 20px;
+}
+
+.scores {
+  font-size: 30px;
+  font-style: bold;
+  color: rgb(233, 201, 159);
+  position: absolute;
+  top: 50px;
+  right: 100px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 20px;
+}
+
+dialog {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+img {
+  padding: 10px;
 }
 
 .board {
@@ -20,4 +62,82 @@
 
 .board > div {
   border: 1px solid;
+}
+
+.board > div {
+  box-shadow: 0 0 5px 2px rgba(0, 0, 0, 0.7);
+  background-color: rgb(233, 201, 159);
+  cursor: pointer;
+  transition: transform 0.2s ease-in-out;
+}
+
+.board > div:hover {
+  transform: scale(1.1);
+  box-shadow: 0 0 5px 4px rgba(0, 0, 0, 0.7);
+}
+
+.board > div:active {
+  transition: 0.1s;
+  transform: scale(0.9);
+}
+
+footer {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.sources {
+  margin-left: 50px;
+  margin-bottom: 30px;
+  color: rgb(233, 201, 159);
+}
+
+a {
+  color: rgb(233, 201, 159);
+}
+
+.github {
+  margin-right: 50px;
+  margin-bottom: 30px;
+  height: 50px;
+  filter: invert(91%) sepia(11%) saturate(1328%) hue-rotate(328deg)
+    brightness(94%) contrast(95%);
+  transition: transform 1.4s ease-in-out;
+}
+
+.github:hover {
+  transform: rotate(720deg) scale(1.3);
+}
+
+@media (max-width: 800px) {
+  header {
+    justify-content: center;
+  }
+  .headline {
+    display: none;
+  }
+  .scores {
+    position: static;
+    font-size: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+  }
+  .board {
+    grid-template: repeat(5, auto) / repeat(5, minmax(50px, 100px));
+    gap: 10px;
+    margin: 30px;
+  }
+  .board > div {
+    width: auto;
+    height: auto;
+  }
+  .sources {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
 }
