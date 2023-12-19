@@ -1,22 +1,30 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import "./styles/App.css";
 import Cards from "./components/cards.js";
 import Header from "./components/header.jsx";
 import Board from "./components/board.jsx";
-import WinDialogWindow from "./components/winDialogWindow.jsx";
+import ModalWindow from "./components/modalWindow.jsx";
+import WelcomeModal from "./components/welcomeModal.jsx";
 import Footer from "./components/footer.jsx";
 
 function App() {
   const [cards, setCards] = useState(Cards);
   const [currentScore, setCurrentScore] = useState(0);
-  const [highScore, setHighScore] = useState(0);
+  const [highScore, setHighScore] = useState(
+    +localStorage.getItem("storedHighScore") || 0,
+  );
+
+  const gameEnded = useRef(false);
 
   useEffect(() => {
     if (currentScore > highScore) {
       setHighScore(currentScore);
+      localStorage.setItem("storedHighScore", currentScore.toString());
     }
-    if (currentScore === 100) {
-      document.querySelector("dialog").showModal();
+    if ((currentScore === 100 || currentScore === 0) && gameEnded.current) {
+      document.querySelector(".modal").showModal();
+    } else if (highScore === 0 && currentScore === 0) {
+      document.querySelector(".modal-welcome").showModal();
     }
   }, [currentScore]);
 
@@ -28,6 +36,7 @@ function App() {
       setCards(newCards);
       setCurrentScore(currentScore + 1);
     } else {
+      gameEnded.current = true;
       setCards(
         Object.keys(newCards).map((card) => ({
           ...newCards[card],
@@ -38,7 +47,7 @@ function App() {
     }
   }
 
-  function handleWin() {
+  function handleResetGame() {
     const newCards = { ...cards };
     setCards(
       Object.keys(newCards).map((card) => ({
@@ -47,14 +56,20 @@ function App() {
       })),
     );
     setCurrentScore(0);
-    document.querySelector("dialog").close();
+    document.querySelector(".modal").close();
+    gameEnded.current = false;
   }
 
   return (
     <>
       <Header currentScore={currentScore} highScore={highScore} />
       <Board onClick={handleClick} cards={cards} score={currentScore} />
-      <WinDialogWindow onClick={handleWin} />
+      <ModalWindow
+        onClick={handleResetGame}
+        currentScore={currentScore}
+        highScore={highScore}
+      />
+      <WelcomeModal />
       <Footer />
     </>
   );
