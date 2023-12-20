@@ -86,7 +86,7 @@ dialog div {
   flex-direction: column;
   justify-content: space-evenly;
   align-items: center;
-  height: 200px;
+  min-height: 200px;
 }
 
 dialog.out div {
@@ -101,6 +101,7 @@ dialog h1 {
     -1px 1px 0 white,
     1px 1px 0 white;
   letter-spacing: 2px;
+  text-align: center;
 }
 
 dialog button {
