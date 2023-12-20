@@ -15,6 +15,7 @@ function App() {
   );
 
   const gameEnded = useRef(false);
+  const finalScore = useRef(0);
 
   useEffect(() => {
     if (currentScore > highScore) {
@@ -22,9 +23,10 @@ function App() {
       localStorage.setItem("storedHighScore", currentScore.toString());
     }
     if ((currentScore === 100 || currentScore === 0) && gameEnded.current) {
-      document.querySelector(".modal").showModal();
+      document.querySelector(".modal").classList.remove("out");
     } else if (highScore === 0 && currentScore === 0) {
-      document.querySelector(".modal-welcome").showModal();
+      // document.querySelector(".modal-welcome").style.display = "flex"; uncomment to hide the welcome modal when highscore is already set after refresh
+      document.querySelector(".modal-welcome").classList.remove("out");
     }
   }, [currentScore]);
 
@@ -36,6 +38,7 @@ function App() {
       setCards(newCards);
       setCurrentScore(currentScore + 1);
     } else {
+      finalScore.current = currentScore;
       gameEnded.current = true;
       setCards(
         Object.keys(newCards).map((card) => ({
@@ -56,7 +59,7 @@ function App() {
       })),
     );
     setCurrentScore(0);
-    document.querySelector(".modal").close();
+    document.querySelector(".modal").classList.add("out");
     gameEnded.current = false;
   }
 
@@ -68,6 +71,7 @@ function App() {
         onClick={handleResetGame}
         currentScore={currentScore}
         highScore={highScore}
+        finalScore={finalScore}
       />
       <WelcomeModal />
       <Footer />

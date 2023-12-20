@@ -14,7 +14,7 @@ export default function Footer() {
         </p>
       </div>
       <a href="https://github.com/Andrij-Kolomijec">
-        <img class="github" src="/github.svg" />
+        <img className="github" src="/github.svg" />
       </a>
     </footer>
   );
