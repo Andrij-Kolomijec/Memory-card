@@ -9,8 +9,8 @@ export default function WelcomeModal() {
     <>
       <dialog className="modal-welcome">
         <div>
-          <h1>Don't click on the same card twice!</h1>
-          <button onClick={closeModal}>Let's play!</button>
+          <h1>Don&apos;t click on the same card twice!</h1>
+          <button onClick={closeModal}>Let&apos;s play!</button>
         </div>
       </dialog>
     </>

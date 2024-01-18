@@ -1,3 +1,5 @@
+import PropTypes from "prop-types";
+
 export default function ModalWindow(props) {
   return (
     <>
@@ -14,3 +16,9 @@ export default function ModalWindow(props) {
     </>
   );
 }
+
+ModalWindow.propTypes = {
+  finalScore: PropTypes.object,
+  currentScore: PropTypes.number,
+  onClick: PropTypes.func,
+};

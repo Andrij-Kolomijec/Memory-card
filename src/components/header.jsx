@@ -1,3 +1,5 @@
+import PropTypes from "prop-types";
+
 export default function Header(props) {
   return (
     <header>
@@ -11,3 +13,8 @@ export default function Header(props) {
     </header>
   );
 }
+
+Header.propTypes = {
+  currentScore: PropTypes.number,
+  highScore: PropTypes.number,
+};

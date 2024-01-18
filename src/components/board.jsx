@@ -1,3 +1,5 @@
+import PropTypes from "prop-types";
+
 export default function Board(props) {
   function generateUniqueNumbersArray() {
     const uniqueNumbers = [];
@@ -40,3 +42,10 @@ export default function Board(props) {
   ));
   return <div className="board">{cardsList}</div>;
 }
+
+Board.propTypes = {
+  score: PropTypes.number,
+  cards: PropTypes.object,
+  clicked: PropTypes.bool,
+  onClick: PropTypes.func,
+};
