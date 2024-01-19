@@ -5,9 +5,11 @@ import Axios from "axios";
 
 export default function ScoreBoard({ scores, setScores }) {
   useEffect(() => {
-    Axios.get("http://localhost:3000/getScores").then((response) => {
-      setScores(response.data.sort((a, b) => b.score - a.score));
-    });
+    Axios.get("https://memory-card-vycm.onrender.com/getScores").then(
+      (response) => {
+        setScores(response.data.sort((a, b) => b.score - a.score));
+      },
+    );
   }, []);
 
   return (
