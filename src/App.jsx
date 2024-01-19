@@ -6,6 +6,7 @@ import Board from "./components/board.jsx";
 import ModalWindow from "./components/modalWindow.jsx";
 import WelcomeModal from "./components/welcomeModal.jsx";
 import Footer from "./components/footer.jsx";
+import ScoreBoard from "./components/scoreBoard.jsx";
 
 function App() {
   const [cards, setCards] = useState(Cards);
@@ -13,6 +14,7 @@ function App() {
   const [highScore, setHighScore] = useState(
     +localStorage.getItem("storedHighScore") || 0,
   );
+  const [scores, setScores] = useState([]);
 
   const gameEnded = useRef(false);
   const finalScore = useRef(0);
@@ -25,7 +27,7 @@ function App() {
     if ((currentScore === 100 || currentScore === 0) && gameEnded.current) {
       document.querySelector(".modal").classList.remove("out");
     } else if (highScore === 0 && currentScore === 0) {
-      // document.querySelector(".modal-welcome").style.display = "flex"; uncomment to hide the welcome modal when highscore is already set after refresh
+      // document.querySelector(".modal-welcome").style.display = "flex";
       document.querySelector(".modal-welcome").classList.remove("out");
     }
   }, [currentScore]);
@@ -67,11 +69,14 @@ function App() {
     <>
       <Header currentScore={currentScore} highScore={highScore} />
       <Board onClick={handleClick} cards={cards} score={currentScore} />
+      <ScoreBoard scores={scores} setScores={setScores} />
       <ModalWindow
         onClick={handleResetGame}
         currentScore={currentScore}
         highScore={highScore}
         finalScore={finalScore}
+        scores={scores}
+        setScores={setScores}
       />
       <WelcomeModal />
       <Footer />

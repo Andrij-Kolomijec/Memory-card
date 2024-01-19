@@ -45,7 +45,7 @@ header {
   gap: 20px;
 }
 
-.modal/* ,
+.modal/*,
 .modal-welcome*/ {
   display: none;
 }
@@ -133,6 +133,31 @@ dialog button:focus {
   outline: none;
 }
 
+.modal form {
+  display: flex;
+  width: 80%;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+form > button {
+  height: 35px;
+  width: 120px;
+  border-radius: 10px;
+  font-size: 15px;
+}
+
+form > input {
+  height: 35px;
+  width: 120px;
+  border-radius: 10px;
+  padding: 0 10px;
+  font-size: 20px;
+  border: 2px solid black;
+  outline: none;
+  background: rgb(233, 201, 159);
+}
+
 img {
   padding: 10px;
 }
@@ -162,6 +187,37 @@ img {
 .board > div:active {
   transition: 0.1s;
   transform: scale(0.9);
+}
+
+.score-board {
+  position: absolute;
+  top: 20%;
+  right: 10%;
+  background: rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(3px);
+  box-shadow: 0 0 5px 2px rgba(0, 0, 0, 0.5);
+  border-radius: 10px;
+  border: 1px solid black;
+  padding: 10px;
+  color: rgb(233, 201, 159);
+  max-height: 550px;
+  overflow: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.score-board > div {
+  padding: 5px;
+}
+
+.loader {
+  border: 10px solid black;
+  border-top: 10px solid rgb(233, 201, 159);
+  border-radius: 50%;
+  width: 10px;
+  height: 10px;
+  animation: spin 2s linear infinite;
+  align-self: center;
 }
 
 footer {
@@ -238,6 +294,22 @@ a {
   }
 }
 
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@media (max-width: 1300px) {
+  .score-board,
+  footer {
+    position: static;
+  }
+}
+
 @media (max-width: 800px) {
   header {
     justify-content: center;
@@ -266,9 +338,7 @@ a {
     flex-direction: column;
     gap: 20px;
   }
-  footer {
-    position: static;
-  }
+
   .board > div:hover {
     transform: none;
   }

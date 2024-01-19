@@ -45,7 +45,7 @@ export default function Board(props) {
 
 Board.propTypes = {
   score: PropTypes.number,
-  cards: PropTypes.object,
+  cards: PropTypes.oneOfType([PropTypes.array, PropTypes.object]).isRequired,
   clicked: PropTypes.bool,
   onClick: PropTypes.func,
 };
