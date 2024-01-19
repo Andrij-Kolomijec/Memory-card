@@ -7,7 +7,7 @@ export default function ScoreInput({ score, onReset, scores, setScores }) {
   const postScore = (e) => {
     e.preventDefault();
     onReset();
-    Axios.post("http://localhost:3000/postScore", {
+    Axios.post("https://memory-card-vycm.onrender.com/postScore", {
       player,
       score: score,
       added: Date.now(),
