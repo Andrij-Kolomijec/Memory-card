@@ -6,6 +6,7 @@ export default function ScoreInput({ score, onReset, scores, setScores }) {
   const [player, setPlayer] = useState("");
   const postScore = (e) => {
     e.preventDefault();
+    if (player.trim() === "") return alert("Name field cannot be empty!");
     onReset();
     Axios.post("https://memory-card-vycm.onrender.com/postScore", {
       player,
@@ -24,6 +25,7 @@ export default function ScoreInput({ score, onReset, scores, setScores }) {
         type="text"
         placeholder="Name"
         onChange={(e) => setPlayer(e.target.value)}
+        required
       />
       <button onClick={postScore}>Submit Score</button>
     </form>
