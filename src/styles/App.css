@@ -218,6 +218,16 @@ img {
   height: 10px;
   animation: spin 2s linear infinite;
   align-self: center;
+  margin: 10px;
+}
+
+.loader-text {
+  text-align: center;
+  color: transparent;
+  background-image: linear-gradient(to left, rgb(233, 201, 159), black);
+  animation: textColor 7s linear infinite;
+  background-size: 500%;
+  background-clip: text;
 }
 
 footer {
@@ -250,6 +260,18 @@ a {
 
 .github:hover {
   transform: rotate(720deg) scale(1.3);
+}
+
+@keyframes textColor {
+  0% {
+    background-position: 0 100%;
+  }
+  50% {
+    background-position: 100% 0;
+  }
+  100% {
+    background-position: 0 100%;
+  }
 }
 
 @keyframes unfoldIn {

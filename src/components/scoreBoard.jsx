@@ -26,7 +26,14 @@ export default function ScoreBoard({ scores, setScores }) {
           );
         })
       ) : (
-        <div className="loader"></div>
+        <>
+          <div className="loader"></div>
+          <p className="loader-text">
+            Loading from a server
+            <br />
+            might take several minutes.
+          </p>
+        </>
       )}
     </div>
   );
