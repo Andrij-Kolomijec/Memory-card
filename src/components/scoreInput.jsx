@@ -1,6 +1,5 @@
 import { useState } from "react";
 import PropTypes from "prop-types";
-import Axios from "axios";
 
 export default function ScoreInput({ score, onReset, scores, setScores }) {
   const [player, setPlayer] = useState("");
@@ -8,15 +7,27 @@ export default function ScoreInput({ score, onReset, scores, setScores }) {
     e.preventDefault();
     if (player.trim() === "") return alert("Name field cannot be empty!");
     onReset();
-    Axios.post("https://memory-card-vycm.onrender.com/postScore", {
-      player,
-      score: score,
-      added: Date.now(),
-    }).then((response) => {
+
+    async function sendScore() {
+      const response = await fetch(import.meta.env.VITE_PORT_FIREBASE, {
+        method: "POST",
+        body: JSON.stringify({
+          player,
+          score,
+          added: Date.now(),
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error("Sending score failed.");
+      }
+
       setScores(
         [...scores, { player, score: score }].sort((a, b) => b.score - a.score),
       );
-    });
+    }
+
+    sendScore();
   };
 
   return (

@@ -1,15 +1,24 @@
 import { useEffect } from "react";
 import PropTypes from "prop-types";
 import { v4 as uuidv4 } from "uuid";
-import Axios from "axios";
 
 export default function ScoreBoard({ scores, setScores }) {
   useEffect(() => {
-    Axios.get("https://memory-card-vycm.onrender.com/getScores").then(
-      (response) => {
-        setScores(response.data.sort((a, b) => b.score - a.score));
-      },
-    );
+    async function fetchScore() {
+      const response = await fetch(import.meta.env.VITE_PORT_FIREBASE);
+
+      if (!response.ok) {
+        throw new Error("Could not fetch cart data!");
+      }
+
+      const data = await response.json();
+
+      return data;
+    }
+
+    fetchScore().then((data) => {
+      setScores(Object.values(data).sort((a, b) => b.score - a.score));
+    });
   }, []);
 
   return (

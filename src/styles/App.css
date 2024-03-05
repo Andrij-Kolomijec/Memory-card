@@ -63,7 +63,6 @@ dialog {
   width: 100%;
   top: 0;
   left: 0;
-  transform: scale(0);
   z-index: 1;
   transform: scaleY(0.01) scaleX(0);
   animation: unfoldIn 1s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
@@ -110,7 +109,6 @@ dialog button {
   height: 70px;
   width: 200px;
   color: rgb(233, 201, 159);
-  border: 1px solid white;
   font-size: 30px;
   border: none;
   transition: transform 0.1s ease-in-out;
